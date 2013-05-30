@@ -8,7 +8,7 @@ dependent on
 ======
 
 redis-py :
-  redis is the default in cache type, so dcache dependent on redis-py, if the real condition is based on other storage, redis-py is not required
+  redis is the default cache storage, so dcache dependent on redis-py, if the real condition is based on other storage, redis-py is not required
 
 example
 ======
