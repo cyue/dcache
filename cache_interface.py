@@ -104,6 +104,6 @@ class RedisCache(CacheInterface):
 
 if __name__ == '__main__':
     cache = RedisCache
-    redis = cache.alloc('172.16.252.32:9001').get_instance()
+    redis = cache.alloc('localhost:6379').get_instance()
     for key in redis.keys():
         print '%s\t%s' % (key, redis.get(key))
