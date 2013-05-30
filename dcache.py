@@ -28,7 +28,7 @@ class Dcache(object):
 
     def add_node(self, node):
         ''' add node to caches, preload the nearest 
-            backforward node data to self'''
+            forward node data to self'''
 
         for fnode in self._nodeRing.get_fnode(node): 
             try:
@@ -42,7 +42,7 @@ class Dcache(object):
 
     def remove_node(self, node):
         ''' remove node from caches, preload own data
-            to the nearest backforword node'''
+            to the nearest forword node'''
 
         for fnode in self._nodeRing.get_fnode(node): 
             try:
