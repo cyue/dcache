@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 #encoding:utf8
 
-from redis import StrictRedis, BlockingConnectionPool, ConnectionPool
+from redis import StrictRedis, BlockingConnectionPool
 
 class CacheInterface(object):
     
-    def __init__(self, host, port):
+    def __init__(self, conn_pool):
         ''' for single client, init host and port;
             for client pool, init pool'''
         pass
@@ -13,8 +13,10 @@ class CacheInterface(object):
     
 
     @classmethod
-    def alloc(self, node):
-        ''' return Cache Object'''
+    def alloc(self, node, max_connections, timeout, db):
+        ''' @node: "host:port" string
+            @db: specific data store in cache
+            return self Object'''
         pass
         
     
@@ -51,10 +53,10 @@ class RedisCache(CacheInterface):
     _pool = None
     
     
-    def __init__(self, pool):
+    def __init__(self, conn_pool):
         ''' for single client, init host and port;
             for client pool, init pool'''
-        self._c = StrictRedis(connection_pool=pool)
+        self._c = StrictRedis(connection_pool=conn_pool)
         self._pool = pool
 
     
@@ -103,7 +105,6 @@ class RedisCache(CacheInterface):
 
 
 if __name__ == '__main__':
-    cache = RedisCache
-    redis = cache.alloc('localhost:6379').get_instance()
+    redis = RedisCache.alloc('localhost:6379').get_instance()
     for key in redis.keys():
         print '%s\t%s' % (key, redis.get(key))
