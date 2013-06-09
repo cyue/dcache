@@ -24,6 +24,10 @@ class Dcache(object):
         else:
             raise DcacheException, 'try to init with no nodes\n'
 
+
+    def get_all_nodes(self, ):
+        for key, node in self._nodeRing.sorted_nodes():
+            yield key, node
         
 
     def add_node(self, node):
