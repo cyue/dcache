@@ -18,3 +18,5 @@ nodes = ['localhost:6379', 'localhost:6378', 'localhost:6377']
 dc = Dcache(nodes=nodes, rep=2, cache=RedisCache)
 
 "rep" is virtual node num in use, RedisCache is a cache class inherit cache_interface, every user defined cache inherited from cache_interface can be loaded in dcache
+
+END
